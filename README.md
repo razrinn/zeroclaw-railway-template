@@ -19,7 +19,7 @@ This template deploys [ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw) - a 
 
 Click the button below to deploy:
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/YOUR_TEMPLATE_ID)
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/deploy/rHDX80?referralCode=pNTW1S&utm_medium=integration&utm_source=template&utm_campaign=generic)
 
 Or manually:
 1. Fork this repo
