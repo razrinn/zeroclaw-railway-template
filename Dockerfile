@@ -38,6 +38,14 @@ COPY --from=builder /src/target/release/zeroclaw /usr/local/bin/zeroclaw
 # Create data directory for persistent storage
 RUN mkdir -p /data/.zeroclaw /data/workspace
 
+# Add shell aliases for faster typing
+RUN echo '# ZeroClaw aliases' >> /etc/bash.bashrc && \
+    echo 'alias zc="zeroclaw"' >> /etc/bash.bashrc && \
+    echo 'alias zrc="nano /data/.zeroclaw/config.toml"' >> /etc/bash.bashrc && \
+    echo 'alias zst="zeroclaw status"' >> /etc/bash.bashrc && \
+    echo 'alias zag="zeroclaw agent"' >> /etc/bash.bashrc && \
+    echo 'alias zch="zeroclaw channel"' >> /etc/bash.bashrc
+
 # Copy startup script
 COPY start.sh /app/start.sh
 RUN chmod +x /app/start.sh
