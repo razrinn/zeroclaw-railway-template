@@ -27,33 +27,9 @@ if [ ! -f "$CONFIG_FILE" ]; then
         sleep 5
     done
     
-    echo "Config detected! Starting ZeroClaw services..."
+    echo "Config detected! Starting ZeroClaw..."
 fi
 
-# Function to cleanup processes on exit
-cleanup() {
-    echo "Shutting down ZeroClaw services..."
-    kill $DAEMON_PID $CHANNELS_PID 2>/dev/null || true
-    wait
-    exit 0
-}
-
-# Trap signals for graceful shutdown
-trap cleanup SIGTERM SIGINT
-
 echo "Starting ZeroClaw daemon..."
-zeroclaw daemon &
-DAEMON_PID=$!
-
-# Wait a bit for daemon to initialize
-echo "Waiting for daemon to initialize..."
-sleep 3
-
-echo "Starting ZeroClaw channels..."
-zeroclaw channel start &
-CHANNELS_PID=$!
-
-echo "ZeroClaw is running (daemon PID: $DAEMON_PID, channels PID: $CHANNELS_PID)"
-
-# Wait for both processes
-wait $DAEMON_PID $CHANNELS_PID
+# Note: daemon already includes channels - don't run channel start separately
+exec zeroclaw daemon
