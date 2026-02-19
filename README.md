@@ -96,6 +96,67 @@ All data is stored in `/data/` which is mounted as a persistent Railway volume:
 | `/data/workspace/` | Working directory for agent operations |
 | `/data/.zeroclaw/cron/` | Scheduled task definitions |
 | `/data/.zeroclaw/sessions/` | Session data |
+| `/data/.zeroclaw/npm-packages.txt` | List of npm packages to auto-install |
+| `/data/.zeroclaw/brew-packages.txt` | List of Homebrew packages to auto-install |
+| `/data/.npm-global/` | Persisted npm global packages |
+| `/data/.npm-cache/` | Persisted npm cache |
+| `/data/.linuxbrew/` | Persisted Homebrew installation |
+
+### NPM Packages Persistence
+
+NPM packages installed globally will survive redeploys. You can manage them in two ways:
+
+**Method 1: Auto-install from list**
+Create `/data/.zeroclaw/npm-packages.txt` with packages to auto-install on startup:
+
+```bash
+# In Railway terminal
+cat > /data/.zeroclaw/npm-packages.txt << 'EOF'
+# Add your npm packages here, one per line
+# Example packages:
+typescript
+@angular/cli
+@nestjs/cli
+EOF
+
+# Restart container to apply
+```
+
+**Method 2: Manual install (also persists)**
+```bash
+npm install -g <package-name>
+# or
+npx install -g <package-name>
+```
+
+Packages are installed to `/data/.npm-global/` which is persisted across redeploys.
+
+### Homebrew Packages Persistence
+
+Homebrew (Linuxbrew) is also available with persistent storage. You can manage packages in two ways:
+
+**Method 1: Auto-install from list**
+Create `/data/.zeroclaw/brew-packages.txt` with packages to auto-install on startup:
+
+```bash
+# In Railway terminal
+cat > /data/.zeroclaw/brew-packages.txt << 'EOF'
+# Add your Homebrew packages here, one per line
+# Example packages:
+jq
+htop
+tree
+EOF
+
+# Restart container to apply
+```
+
+**Method 2: Manual install (also persists)**
+```bash
+brew install <package-name>
+```
+
+Packages are installed to `/data/.linuxbrew/` which is persisted across redeploys. Brew is automatically available in the shell via `/etc/bash.bashrc`.
 
 ## Environment Variables
 
