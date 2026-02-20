@@ -52,7 +52,7 @@ ENV PATH="/data/.linuxbrew/bin:/data/.linuxbrew/sbin:$PATH"
 COPY --from=builder /src/target/release/zeroclaw /usr/local/bin/zeroclaw
 
 # Create data directory for persistent storage
-RUN mkdir -p /data/.zeroclaw /data/workspace /data/.npm-global /data/.npm-cache /data/.linuxbrew
+RUN mkdir -p /data/.zeroclaw /data/.npm-global /data/.npm-cache /data/.linuxbrew
 
 # Add shell aliases for faster typing
 RUN echo '# ZeroClaw aliases' >> /etc/bash.bashrc && \
@@ -72,7 +72,6 @@ RUN chmod +x /app/start.sh
 
 # Set environment - HOME=/data makes ZeroClaw use /data/.zeroclaw
 ENV HOME=/data
-ENV ZEROCLAW_WORKSPACE=/data/workspace
 
 # Expose gateway port
 EXPOSE 3000

@@ -2,7 +2,7 @@
 set -e
 
 # Ensure directories exist
-mkdir -p /data/.zeroclaw /data/workspace /data/.zeroclaw/logs /data/.npm-global /data/.npm-cache
+mkdir -p /data/.zeroclaw /data/.zeroclaw/logs /data/.npm-global /data/.npm-cache
 
 # Configure npm to use persistent storage
 npm config set prefix '/data/.npm-global'
