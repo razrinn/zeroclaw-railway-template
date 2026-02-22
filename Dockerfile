@@ -22,38 +22,16 @@ RUN cargo build --release --locked
 RUN strip target/release/zeroclaw
 
 # ── Stage 2: Runtime ────────────────────────────────────────────
-FROM debian:trixie-slim
+FROM mcr.microsoft.com/playwright:v1.49.1-noble
 
-# Install runtime dependencies + text editors + Node.js + Homebrew deps + Playwright deps
+# Install additional tools (nano, vim, etc.)
 RUN apt-get update && apt-get install -y \
-    ca-certificates \
-    curl \
     nano \
     vim \
-    nodejs \
-    npm \
     git \
     build-essential \
     procps \
     file \
-    # Playwright dependencies (browsers need these)
-    libnss3 \
-    libnspr4 \
-    libatk1.0-0 \
-    libatk-bridge2.0-0 \
-    libcups2 \
-    libdrm2 \
-    libxkbcommon0 \
-    libxcomposite1 \
-    libxdamage1 \
-    libxfixes3 \
-    libxrandr2 \
-    libgbm1 \
-    libpango-1.0-0 \
-    libcairo2 \
-    libasound2 \
-    libgtk-3-0 \
-    libgdk-pixbuf-xlib-2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure npm to use persistent storage (survives redeploys)
