@@ -75,7 +75,7 @@ ENV HOME=/data
 ENV SHELL=/bin/bash
 
 # Expose gateway port
-EXPOSE 3000
+EXPOSE 8080
 
 WORKDIR /data
 

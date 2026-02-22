@@ -183,7 +183,7 @@ docker build -t railway-zeroclaw .
 
 # Run locally
 docker run --rm -it \
-  -p 3000:3000 \
+  -p 8080:8080 \
   -v $(pwd)/.tmpdata:/data \
   railway-zeroclaw
 

@@ -4,7 +4,7 @@ ZeroClaw is a lightweight, terminal-based AI agent runtime written in Rust. Desi
 
 ## About Hosting ZeroClaw (CLI-only)
 
-Deploying ZeroClaw on Railway involves building the Rust binary from source in a Docker container, configuring it via SSH terminal, and running it as a persistent daemon. The setup uses a multi-stage Dockerfile that compiles ZeroClaw and runs it on a minimal Debian image. A persistent volume at `/data` ensures your configuration, API keys, and chat history survive redeploys. Once deployed, you access the container through Railway's web terminal to run initial setup commands like `zeroclaw onboard`, then the daemon auto-starts on subsequent boots. The container exposes port 3000 for webhook integrations and handles all channel polling internally.
+Deploying ZeroClaw on Railway involves building the Rust binary from source in a Docker container, configuring it via SSH terminal, and running it as a persistent daemon. The setup uses a multi-stage Dockerfile that compiles ZeroClaw and runs it on a minimal Debian image. A persistent volume at `/data` ensures your configuration, API keys, and chat history survive redeploys. Once deployed, you access the container through Railway's web terminal to run initial setup commands like `zeroclaw onboard`, then the daemon auto-starts on subsequent boots. The container exposes port 8080 for webhook integrations and handles all channel polling internally.
 
 ## Common Use Cases
 
