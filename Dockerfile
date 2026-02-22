@@ -72,6 +72,7 @@ RUN chmod +x /app/start.sh
 
 # Set environment - HOME=/data makes ZeroClaw use /data/.zeroclaw
 ENV HOME=/data
+ENV SHELL=/bin/bash
 
 # Expose gateway port
 EXPOSE 3000
