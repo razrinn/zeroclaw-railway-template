@@ -53,7 +53,7 @@ RUN apt-get update && apt-get install -y \
     libcairo2 \
     libasound2 \
     libgtk-3-0 \
-    libgdk-pixbuf2.0-0 \
+    libgdk-pixbuf-xlib-2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure npm to use persistent storage (survives redeploys)
