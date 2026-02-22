@@ -1,4 +1,4 @@
-# ZeroClaw Railway Template
+# ZeroClaw Railway Template 🦀
 
 ZeroClaw deployed on Railway with persistent storage.
 
@@ -6,12 +6,20 @@ ZeroClaw deployed on Railway with persistent storage.
 
 This template deploys [ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw) - a lean, fast AI agent runtime written in Rust - to Railway with a persistent volume for configuration and data.
 
+**ZeroClaw**: Zero overhead. Zero compromise. 100% Rust. 100% Agnostic.
+
+⚡️ **Runs on $10 hardware with <5MB RAM** - That's 99% less memory than OpenClaw and 98% cheaper than a Mac mini!
+
 ## Features
 
-- **Auto-starting daemon**: Container automatically runs `zeroclaw daemon` on boot
-- **Persistent storage**: Configuration, workspace, and sessions survive redeploys
-- **SSH access**: Railway's terminal feature lets you run commands interactively
-- **Terminal-only**: No web UI - use SSH to configure and interact
+- **🚀 Auto-starting daemon**: Container automatically runs `zeroclaw daemon` on boot
+- **💾 Persistent storage**: Configuration, workspace, and sessions survive redeploys
+- **🔒 Secure by design**: Pairing codes, encrypted secrets, workspace scoping, explicit allowlists
+- **🌍 Multi-channel support**: Telegram, Discord, Slack, WhatsApp, Matrix, and more
+- **🧠 Built-in memory**: SQLite hybrid search (vector + keyword), no external dependencies
+- **🔧 SSH access**: Railway's terminal feature lets you run commands interactively
+- **⚡ Fast cold starts**: Single-binary Rust runtime with near-instant startup
+- **📦 Package persistence**: NPM and Homebrew packages survive redeploys
 
 ## Deployment
 
@@ -165,6 +173,7 @@ Packages are installed to `/data/.linuxbrew/` which is persisted across redeploy
 | `HOME` | `/data` | Sets home directory (ZeroClaw uses `~/.zeroclaw` = `/data/.zeroclaw`) |
 | `ZEROCLAW_WORKSPACE` | `/data/workspace` | Workspace directory |
 | `ZEROCLAW_VERSION` | `main` | Git branch/tag to build from |
+| `ZEROCLAW_CONTAINER_CLI` | `docker` | Container CLI to use (`docker` or `podman`) |
 
 ## Local Testing
 
@@ -213,6 +222,42 @@ The daemon runs as PID 1 in the container, handling signals properly for gracefu
 
 See [ZeroClaw documentation](https://github.com/zeroclaw-labs/zeroclaw) for more channels.
 
+## Architecture
+
+ZeroClaw uses a **trait-driven architecture** — swap implementations with a config change, zero code changes:
+
+| Subsystem | Trait | Ships with |
+|-----------|-------|------------|
+| **AI Models** | `Provider` | OpenRouter, OpenAI, Anthropic, Ollama, llama.cpp, vLLM, custom endpoints |
+| **Channels** | `Channel` | Telegram, Discord, Slack, Mattermost, WhatsApp, Matrix, Signal, Email, Webhook |
+| **Memory** | `Memory` | SQLite hybrid search, PostgreSQL, Markdown files |
+| **Tools** | `Tool` | Shell, file, git, browser, HTTP, cron, hardware |
+| **Runtime** | `RuntimeAdapter` | Native, Docker (sandboxed) |
+| **Security** | `SecurityPolicy` | Gateway pairing, sandbox, allowlists, encrypted secrets |
+
+## Memory System
+
+ZeroClaw includes a **full-stack search engine** with zero external dependencies:
+
+| Layer | Implementation |
+|-------|---------------|
+| **Vector DB** | Embeddings stored as BLOB in SQLite, cosine similarity search |
+| **Keyword Search** | FTS5 virtual tables with BM25 scoring |
+| **Hybrid Merge** | Custom weighted merge function |
+| **Embeddings** | OpenAI, custom URL, or none |
+| **Caching** | SQLite `embedding_cache` table with LRU eviction |
+
+## Security Checklist
+
+ZeroClaw enforces security at every layer:
+
+| # | Item | Status |
+|---|------|--------|
+| 1 | **Gateway not publicly exposed** | ✅ Binds `127.0.0.1` by default |
+| 2 | **Pairing required** | ✅ 6-digit one-time code on startup |
+| 3 | **Filesystem scoped** | ✅ `workspace_only = true` by default |
+| 4 | **Access via tunnel only** | ✅ Gateway refuses public bind without tunnel |
+
 ## Troubleshooting
 
 **Daemon not running?**
@@ -232,6 +277,33 @@ zeroclaw logs
 - Check `ZEROCLAW_VERSION` exists on GitHub
 - Rust build can take 5-10 minutes on first deploy
 
+**Channel authorization issues?**
+```bash
+# Rerun channel setup only
+zeroclaw onboard --channels-only
+
+# Bind Telegram identity
+zeroclaw channel bind-telegram <YOUR_USER_ID>
+```
+
+## Links & Resources
+
+- **GitHub**: https://github.com/zeroclaw-labs/zeroclaw
+- **Documentation**: https://github.com/zeroclaw-labs/zeroclaw/tree/main/docs
+- **Issues**: https://github.com/zeroclaw-labs/zeroclaw/issues
+- **Releases**: https://github.com/zeroclaw-labs/zeroclaw/releases
+- **Official Website**: https://zeroclawlabs.ai
+
+## Community
+
+- [X (@zeroclawlabs)](https://x.com/zeroclawlabs?s=21)
+- [Reddit (r/zeroclawlabs)](https://www.reddit.com/r/zeroclawlabs/)
+- [Telegram (@zeroclawlabs)](https://t.me/zeroclawlabs)
+
 ## License
 
-MIT - See [ZeroClaw License](https://github.com/zeroclaw-labs/zeroclaw/blob/main/LICENSE)
+ZeroClaw is dual-licensed under [MIT](https://github.com/zeroclaw-labs/zeroclaw/blob/main/LICENSE-MIT) OR [Apache 2.0](https://github.com/zeroclaw-labs/zeroclaw/blob/main/LICENSE-APACHE) - choose whichever works best for you.
+
+---
+
+**ZeroClaw** — Zero overhead. Zero compromise. Deploy anywhere. Swap anything. 🦀
