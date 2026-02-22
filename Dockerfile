@@ -24,7 +24,7 @@ RUN strip target/release/zeroclaw
 # ── Stage 2: Runtime ────────────────────────────────────────────
 FROM debian:trixie-slim
 
-# Install runtime dependencies + text editors + Node.js + Homebrew deps
+# Install runtime dependencies + text editors + Node.js + Homebrew deps + Playwright deps
 RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
@@ -36,6 +36,24 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     procps \
     file \
+    # Playwright dependencies (browsers need these)
+    libnss3 \
+    libnspr4 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libdrm2 \
+    libxkbcommon0 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libpango-1.0-0 \
+    libcairo2 \
+    libasound2 \
+    libgtk-3-0 \
+    libgdk-pixbuf2.0-0 \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure npm to use persistent storage (survives redeploys)
