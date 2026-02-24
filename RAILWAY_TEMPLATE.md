@@ -34,6 +34,19 @@ RUN cargo build --release --locked
 
 # Stage 2: Runtime
 FROM debian:trixie-slim
+
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y \
+    nano \
+    vim \
+    git \
+    build-essential \
+    procps \
+    file \
+    curl \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY --from=builder /src/target/release/zeroclaw /usr/local/bin/
 ENV HOME=/data
 CMD ["zeroclaw", "daemon"]

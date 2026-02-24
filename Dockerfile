@@ -22,7 +22,7 @@ RUN cargo build --release --locked
 RUN strip target/release/zeroclaw
 
 # ── Stage 2: Runtime ────────────────────────────────────────────
-FROM mcr.microsoft.com/playwright:v1.58.2-noble
+FROM debian:trixie-slim
 
 # Install additional tools (nano, vim, etc.)
 RUN apt-get update && apt-get install -y \
@@ -32,6 +32,8 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     procps \
     file \
+    curl \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure npm to use persistent storage (survives redeploys)

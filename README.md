@@ -231,7 +231,7 @@ ZeroClaw uses a **trait-driven architecture** — swap implementations with a co
 | **AI Models** | `Provider` | OpenRouter, OpenAI, Anthropic, Ollama, llama.cpp, vLLM, custom endpoints |
 | **Channels** | `Channel` | Telegram, Discord, Slack, Mattermost, WhatsApp, Matrix, Signal, Email, Webhook |
 | **Memory** | `Memory` | SQLite hybrid search, PostgreSQL, Markdown files |
-| **Tools** | `Tool` | Shell, file, git, browser, HTTP, cron, hardware |
+| **Tools** | `Tool` | Shell, file, git, HTTP, cron, hardware |
 | **Runtime** | `RuntimeAdapter` | Native, Docker (sandboxed) |
 | **Security** | `SecurityPolicy` | Gateway pairing, sandbox, allowlists, encrypted secrets |
 
