@@ -24,7 +24,7 @@ RUN strip target/release/zeroclaw
 # ── Stage 2: Runtime ────────────────────────────────────────────
 FROM debian:trixie-slim
 
-# Install additional tools (nano, vim, etc.)
+# Install additional tools (nano, vim, nodejs, npm, etc.)
 RUN apt-get update && apt-get install -y \
     nano \
     vim \
@@ -34,6 +34,8 @@ RUN apt-get update && apt-get install -y \
     file \
     curl \
     ca-certificates \
+    nodejs \
+    npm \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure npm to use persistent storage (survives redeploys)
